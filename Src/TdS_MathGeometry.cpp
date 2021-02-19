@@ -31,20 +31,10 @@ void TdS_Vector2D_Normalize(double *v)
 
 double TdS_ACosSin(double rCos, double rSin, bool deg1_rad0)
 {
-	double radius, radAsin, radAcos, radResult;
-	radius = sqrt(rCos*rCos + rSin*rSin);
-	if (radius < eps) return 0;
-	if (rSin>radius) rSin = radius; if (rSin<-radius) rSin = -radius;
-	if (rCos>radius) rCos = radius; if (rCos<-radius) rCos = -radius;
-	radAsin = asin(rSin / radius);
-	radAcos = acos(rCos / radius);
-	if (radAsin>0)	radResult = (radAcos>Pi / 2) ? (Pi - radAsin) : (radAsin);
-	else			radResult = (radAcos>Pi / 2) ? (Pi - radAsin) : (radAsin + PiTwo);
-
 	if(deg1_rad0)
-		return radResult/Pi*180.0;
+		return atan2(rSin, rCos) /Pi*180.0;
 	else
-		return radResult;
+		return atan2(rSin, rCos);
 }
 
 /*3D*/
